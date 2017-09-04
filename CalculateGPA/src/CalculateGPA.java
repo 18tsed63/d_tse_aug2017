@@ -25,7 +25,7 @@ public class CalculateGPA {
 		grade2 = 3.5;
 		gpa = (grade1 + grade2 + grade3)/3;
 		
-		System.out.println("GPA if u were smarter");
+		System.out.println("GPA if u were smarter:");
 		System.out.println(gpa);		
 		
 	}
