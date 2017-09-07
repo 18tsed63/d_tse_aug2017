@@ -2,6 +2,8 @@
  * 9.6.17
  * write math functions here
  */
+
+// part 1
 public class Calculate {
 	public static int square(int operand){
 	 int square = operand*operand;
@@ -63,8 +65,22 @@ int polynomialC = B*D;
 String foil = (polynomialA+n+"^2"+" +"+"("+polynomialB+n+")"+" "+"+"+"(" + polynomialC + ")");
 return foil;
 
-	}
 }
+
+// part 2
+
+public static boolean isDivisibleBy(int Dividend, int Divisor)
+{
+if(Dividend%Divisor==0) return true; 
+else
+return false;
+}
+}
+
+
+
+	
+
 
 
 
