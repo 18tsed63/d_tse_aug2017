@@ -51,30 +51,29 @@ public static String toImproperFrac(int A, int B, int C) {
 	}
 
 public static String toMixedNum(int A, int B) {
-int wholeNum = A/B;
-int numerator = A%B;
-int denominator = B;
-String toImproperFrac = (wholeNum + "_" + numerator + "/" + denominator);
-return toImproperFrac;
+	int wholeNum = A/B;
+	int numerator = A%B;
+	int denominator = B;
+	String toImproperFrac = (wholeNum + "_" + numerator + "/" + denominator);
+	return toImproperFrac;
 	}
 
 public static String foil(int A, int B, int C, int D, String n) {
-int polynomialA = A*C;
-int polynomialB = (A*D) + (B*C);
-int polynomialC = B*D;
-String foil = (polynomialA+n+"^2"+" +"+"("+polynomialB+n+")"+" "+"+"+"(" + polynomialC + ")");
-return foil;
-
-}
+	int polynomialA = A*C;
+	int polynomialB = (A*D) + (B*C);
+	int polynomialC = B*D;
+	String foil = (polynomialA+n+"^2"+" +"+"("+polynomialB+n+")"+" "+"+"+"(" + polynomialC + ")");
+	return foil;
+	
+	}
 
 // part 2
 
-public static boolean isDivisibleBy(int Dividend, int Divisor)
-{
-if(Dividend%Divisor==0) return true; 
-else
-return false;
-}
+public static boolean isDivisibleBy(int Dividend, int Divisor){
+	if(Dividend%Divisor==0) return true; 
+	else
+		return false;
+	}
 }
 
 
