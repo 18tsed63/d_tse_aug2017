@@ -74,11 +74,67 @@ public static boolean isDivisibleBy(int Dividend, int Divisor){
 	else
 		return false;
 	}
-}
+public static double absValue(double A) {
+	if(A > 0) return A;
+ 	else { return A*-1;
+ 		}
+	}
 
+public static double max(double A, double B) {
+	if(A > B) return A;
+	else { return B;
+		}
+	}
 
+public static double max(double A, double B, double C) {
+	if(A > B && A > C) return A;
+	if(B > A && B > C) return B;
+	else { return C;
+			}
+	}
 
-	
+public static double min(double A, double B) {
+	if(A < B) return A;
+	else { return B;
+		}
+	}
+
+public static double round2(double A) {
+	if(A * 1000 % 10 < 5) {
+		return ((A * 1000) - (A * 1000 % 10))/1000;
+	}else { 
+		return ((A * 1000) + (10 - (A * 1000 % 10)))/1000;
+    		}
+	}
+
+//part 3
+public static double exponent(double A, int B) {
+	int i = 1;
+	double k = A;
+	while (i < B) {
+	 k *= A;
+	 i++;
+			}
+	return k;
+	}
+
+public static int factorial(int a) {
+	int i = 1;
+	for (i = 1; a >= 1; a--) {
+		i *= a;
+		}
+return i;
+	}
+
+public static boolean isPrime(int a) {
+	for(int i = a - 1; i >1; i--) {
+		if (i != 1 && a % i == 0) 
+			return false;
+		else { return true;
+			}
+		}return false;	
+	}
+}	
 
 
 
