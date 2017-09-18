@@ -161,12 +161,9 @@ public static double sqrt(double a) {
 		b = c;
 		b = b - 0.01;
 		}
+		b = b + 0.01;
 		return round2(b);
 	}	
-
-
-
-
 }
 
 
