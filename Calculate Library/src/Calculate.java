@@ -126,15 +126,45 @@ public static int factorial(int a) {
 return i;
 	}
 
+
 public static boolean isPrime(int a) {
-	for(int i = a - 1; i >1; i--) {
-		if (i != 1 && a % i == 0) 
+	for(int i = 2; i < a; i++) {
+		if(isDivisibleBy(a, i) == true) {
 			return false;
-		else { return true;
 			}
-		}return false;	
+		}
+		return true;
 	}
-}	
+
+public static int gcf(int a, int b) {
+	while(b != 0) {
+        int i = a;
+		a = b;
+        if(isDivisibleBy(i, b) == true) {
+		return Math.abs(a);
+		}
+ b = i%b;   
+	}
+    return Math.abs(a);
+}
+
+public static double sqrt(double a) {
+	double b = 1;
+	while(a >= b * b) {
+		b++;
+		}
+	while(a <= b * b) {
+		double c;
+		c = a / b;
+		c = c + b;
+		c = c / 2;
+		b = c;
+		b = b - 0.01;
+		}
+		return round2(b);
+	}	
+}
+	
 
 
 
