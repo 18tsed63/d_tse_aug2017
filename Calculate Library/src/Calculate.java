@@ -183,6 +183,7 @@ public static String quadForm(int a, int b, int c) {
 	x2 = x2 / (2 * a);
 String i = x1 + ", " + x2;
 	return i;
+
 }	
 
 
