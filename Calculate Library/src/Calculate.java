@@ -172,21 +172,23 @@ public static double sqrt(double a) {
 		return round2(b);
 	}	
 // part 4
-/*public static String quadForm(int a, int b, int c) {
-	String x1;
-	String x2;
-	int d = discriminant(a, b, c);
+public static String quadForm(int a, int b, int c) {
+	double x1;
+	double x2;
+	double d = discriminant(a, b, c);
 	d = sqrt(d);
-	x1 = (-1*b) + d;
-	x1 = x1 / (2*a);
-	x2 = (-1*b) - d;
-	x2 = x2 / (2*a);
-	
+	x1 = (-1 * b) + d;
+	x1 = x1 / (2 * a);
+	x2 = (-1 * b) - d;
+	x2 = x2 / (2 * a);
+String i = x1 + ", " + x2;
+	return i;
+}	
 
 
 
 
-*/
+
 }
 
 
