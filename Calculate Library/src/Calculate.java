@@ -99,13 +99,20 @@ public static double min(double A, double B) {
 		}
 	}
 
-public static double round2(double A) {
-	if(A * 1000 % 10 < 5) {
-		return ((A * 1000) - (A * 1000 % 10))/1000;
-	}else { 
-		return ((A * 1000) + (10 - (A * 1000 % 10)))/1000;
-    		}
-	}
+public static double round2(double orig)
+{
+	double result = 0.0;
+		
+	int tempInt = (int)(orig * 1000);
+	int roundNum = tempInt % 10;
+	tempInt = tempInt / 10;
+	if (roundNum >= 5 && tempInt > 0)
+		tempInt++;
+	else if(roundNum <= -5 && tempInt < 0)
+		tempInt--;
+	result = tempInt / 100.0;
+	return result;
+}
 
 //part 3
 public static double exponent(double A, int B) {
@@ -164,9 +171,23 @@ public static double sqrt(double a) {
 		b = b + 0.01;
 		return round2(b);
 	}	
+// part 4
+/*public static String quadForm(int a, int b, int c) {
+	String x1;
+	String x2;
+	int d = discriminant(a, b, c);
+	d = sqrt(d);
+	x1 = (-1*b) + d;
+	x1 = x1 / (2*a);
+	x2 = (-1*b) - d;
+	x2 = x2 / (2*a);
+	
+
+
+
+
+*/
 }
-
-
 
 
 	
