@@ -38,30 +38,28 @@ public static double toRadians ( double operand) {
 	return toRadians;
 	}
 
-public static double discriminant(double A, double B, double C){
-	double discriminant = (B*B) - (4*A*C);
+public static double discriminant(double a, double b, double c){
+	double discriminant = (b * b) - (4 * a * c);
 		return discriminant;
 	}
 
-public static String toImproperFrac(int A, int B, int C) {
-	int numerator = (A*C)+B;
-	int denominator = C;
+public static String toImproperFrac(int whole, int numerator, int denominator) {
+	numerator = (whole * denominator) + numerator;
 	String toImproperFrac = (numerator + "/" + denominator);
 	return toImproperFrac;
 	}
 
-public static String toMixedNum(int A, int B) {
-	int wholeNum = A/B;
-	int numerator = A%B;
-	int denominator = B;
+public static String toMixedNum(int numerator, int denominator) {
+	int wholeNum = numerator / denominator;
+	numerator = numerator % denominator;
 	String toImproperFrac = (wholeNum + "_" + numerator + "/" + denominator);
 	return toImproperFrac;
 	}
 
-public static String foil(int A, int B, int C, int D, String n) {
-	int polynomialA = A*C;
-	int polynomialB = (A*D) + (B*C);
-	int polynomialC = B*D;
+public static String foil(int a, int b, int c, int d, String n) {
+	int polynomialA = a * c;
+	int polynomialB = (a * d) + (b * c);
+	int polynomialC = b * d;
 	String foil = (polynomialA+n+"^2"+" +"+"("+polynomialB+n+")"+" "+"+"+"(" + polynomialC + ")");
 	return foil;
 	
@@ -74,28 +72,28 @@ public static boolean isDivisibleBy(int Dividend, int Divisor){
 	else
 		return false;
 	}
-public static double absValue(double A) {
-	if(A > 0) return A;
- 	else { return A*-1;
+public static double absValue(double a) {
+	if(a > 0) return a;
+ 	else { return a * -1;
  		}
 	}
 
-public static double max(double A, double B) {
-	if(A > B) return A;
-	else { return B;
+public static double max(double num1, double num2) {
+	if(num1 > num2) return num1;
+	else { return num2;
 		}
 	}
 
-public static double max(double A, double B, double C) {
-	if(A > B && A > C) return A;
-	if(B > A && B > C) return B;
-	else { return C;
+public static double max(double num1, double num2, double num3) {
+	if(num1 > num2 && num1 > num3) return num1;
+	if(num2 > num1 && num2 > num3) return num2;
+	else { return num3;
 			}
 	}
 
-public static double min(double A, double B) {
-	if(A < B) return A;
-	else { return B;
+public static double min(double num1, double num2) {
+	if(num1 < num2) return num1;
+	else { return num2;
 		}
 	}
 
@@ -115,48 +113,51 @@ public static double round2(double orig)
 }
 
 //part 3
-public static double exponent(double A, int B) {
+public static double exponent(double baseNum, int exponent) {
 	int i = 1;
-	double k = A;
-	while (i < B) {
-	 k *= A;
+	double k = baseNum;
+	while (i < exponent) {
+	 k *= baseNum;
 	 i++;
 			}
 	return k;
 	}
 
-public static int factorial(int a) {
+public static int factorial(int num) {
 	int i = 1;
-	for (i = 1; a >= 1; a--) {
-		i *= a;
+	for (i = 1; num >= 1; num--) {
+		i *= num;
 		}
 return i;
 	}
 
 
-public static boolean isPrime(int a) {
-	for(int i = 2; i < a; i++) {
-		if(isDivisibleBy(a, i) == true) {
+public static boolean isPrime(int num) {
+	for(int i = 2; i < num; i++) {
+		if(isDivisibleBy(num, i) == true) {
 			return false;
 			}
 		}
 		return true;
 	}
 
-public static int gcf(int a, int b) {
-	while(b != 0) {
-        int i = a;
-		a = b;
-        if(isDivisibleBy(i, b) == true) {
-		return Math.abs(a);
+public static int gcf(int num1, int num2) {
+	while(num2 != 0) {
+        int i = num1;
+		num1 = num2;
+        if(isDivisibleBy(i, num2) == true) {
+		return Math.abs(num2);
 		}
- b = i%b;   
+ num2 = i % num2;   
 	}
-    return Math.abs(a);
+    return Math.abs(num1);
 }
 
 public static double sqrt(double a) {
-	double b = 1;
+	if(a == 0) {
+		return a;
+	}
+	double b = 0;
 	while(a >= b * b) {
 		b++;
 		}
@@ -170,19 +171,42 @@ public static double sqrt(double a) {
 		}
 		b = b + 0.01;
 		return round2(b);
-	}	
+}
+
+	/*double b = 1;
+	while(a-(b*b)>= 0.05) {
+	b = (b+(a/b))*0.5;
+	}
+	return b;
+}
+
+}*/	
 // part 4
 public static String quadForm(int a, int b, int c) {
+	String k = "no real roots";
 	double x1;
 	double x2;
 	double d = discriminant(a, b, c);
-	d = sqrt(d);
-	x1 = (-1 * b) + d;
-	x1 = x1 / (2 * a);
-	x2 = (-1 * b) - d;
-	x2 = x2 / (2 * a);
-String i = x1 + ", " + x2;
-	return i;
+	if(d > 0) {
+		d = sqrt(d);
+		x1 = (-1 * b) + d;
+		x1 = x1 / (2 * a);
+		x2 = (-1 * b) - d;
+		x2 = x2 / (2 * a);
+		String i = x1 + " and " + x2;
+		return i;
+	}
+	if(d == 0) {
+		x1 = (-1 * b) + d;
+		x1 = x1 / (2 * a);
+		String j = x1 + " ";
+		return j;
+	}
+	if(d < 0) {
+		return k;
+	}
+		return k;
+}
 
 }	
 
@@ -190,7 +214,7 @@ String i = x1 + ", " + x2;
 
 
 
-}
+
 
 
 	
