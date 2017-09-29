@@ -52,8 +52,8 @@ public static String toImproperFrac(int whole, int numerator, int denominator) {
 public static String toMixedNum(int numerator, int denominator) {
 	int wholeNum = numerator / denominator;
 	numerator = numerator % denominator;
-	String toImproperFrac = (wholeNum + "_" + numerator + "/" + denominator);
-	return toImproperFrac;
+	String toMixedNum = (wholeNum + "_" + numerator + "/" + denominator);
+	return toMixedNum;
 	}
 
 public static String foil(int a, int b, int c, int d, String n) {
@@ -172,36 +172,34 @@ public static double sqrt(double a) {
 		b = b + 0.01;
 		return round2(b);
 }
-
-	/*double b = 1;
-	while(a-(b*b)>= 0.05) {
-	b = (b+(a/b))*0.5;
-	}
-	return b;
-}
-
-}*/	
+	
 // part 4
 public static String quadForm(int a, int b, int c) {
 	String k = "no real roots";
 	double x1;
 	double x2;
 	double d = discriminant(a, b, c);
+	// 2 solution
 	if(d > 0) {
 		d = sqrt(d);
 		x1 = (-1 * b) + d;
 		x1 = x1 / (2 * a);
 		x2 = (-1 * b) - d;
 		x2 = x2 / (2 * a);
+		x1 = round2(x1);
+		x2 = round2(x2);
 		String i = x1 + " and " + x2;
 		return i;
 	}
+	// 1 solution
 	if(d == 0) {
 		x1 = (-1 * b) + d;
 		x1 = x1 / (2 * a);
+		x1 = round2(x1);
 		String j = x1 + " ";
 		return j;
 	}
+	// no solution
 	if(d < 0) {
 		return k;
 	}
