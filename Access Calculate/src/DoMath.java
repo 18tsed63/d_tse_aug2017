@@ -1,6 +1,7 @@
 /* Darius Tse
- * 9.6.17
+ * 9.29.17
  * test math functions here
+ * 2nd period
  */
 public class DoMath {
 
@@ -24,7 +25,6 @@ public class DoMath {
 		System.out.println(Calculate.round2(2.015));
 		System.out.println(Calculate.exponent(2,3));
 		System.out.println(Calculate.factorial(5));
-		System.out.println(Calculate.isPrime(91));
 		System.out.println(Calculate.isPrime(61));
 		System.out.println(Calculate.gcf(64, 24));
 		System.out.println(Calculate.sqrt(30));

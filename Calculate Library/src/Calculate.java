@@ -1,37 +1,39 @@
 /* Darius Tse
- * 9.6.17
+ * 9.29.17
  * write math functions here
+ * 2nd period
  */
 
 // part 1
 public class Calculate {
+	// takes an integer and returns the integer squared
 	public static int square(int operand){
 	 int square = operand*operand;
 			 return square;
 	}
 
-		 
+// takes an integer and returns the integer cubed		 
 public static int cube( int operand){
 		int cube = operand*operand*operand;
 			return cube;
 	}
-	
+// takes 2 ints, returns average of 2 ints	
 public static double average ( double operand1, double operand2){
 		double average = (operand1 + operand2)/2;
 			return average;
 	}
-
+// takes 3 ints, returns average of 3 ints
 public static double average ( double operand1, double operand2, double operand3){
 	double average = (operand1 + operand2 + operand3)/3;
 		return average;
 	}
-
+// takes a double, returns double in degrees
 public static double toDegrees ( double operand) {
 	double pi = 3.14159;
 	double toDegrees = (operand*180/pi);
 	return toDegrees;
 	}
-
+// takes a double, returns double in radians
 public static double toRadians ( double operand) {
 	double pi = 3.14159;
 	double toRadians = (operand*pi/180);
@@ -55,7 +57,7 @@ public static String toMixedNum(int numerator, int denominator) {
 	String toMixedNum = (wholeNum + "_" + numerator + "/" + denominator);
 	return toMixedNum;
 	}
-
+// takes 4 ints and a String, returns the ints and String "foiled"
 public static String foil(int a, int b, int c, int d, String n) {
 	int polynomialA = a * c;
 	int polynomialB = (a * d) + (b * c);
@@ -66,37 +68,38 @@ public static String foil(int a, int b, int c, int d, String n) {
 	}
 
 // part 2
-
+// takes 2 ints, returns true when dividend is divisible by divisor
 public static boolean isDivisibleBy(int Dividend, int Divisor){
 	if(Dividend%Divisor==0) return true; 
 	else
 		return false;
 	}
+// takes a double, returns absolute value of the double
 public static double absValue(double a) {
 	if(a > 0) return a;
  	else { return a * -1;
  		}
 	}
-
+// takes 2 double, returns the bigger double
 public static double max(double num1, double num2) {
 	if(num1 > num2) return num1;
 	else { return num2;
 		}
 	}
-
+// takes 3 double, returns the biggest double
 public static double max(double num1, double num2, double num3) {
 	if(num1 > num2 && num1 > num3) return num1;
 	if(num2 > num1 && num2 > num3) return num2;
 	else { return num3;
 			}
 	}
-
+// takes 2 double, returns the smallest double
 public static double min(double num1, double num2) {
 	if(num1 < num2) return num1;
 	else { return num2;
 		}
 	}
-
+// takes a double, returns double rounded to the nearest 0.01
 public static double round2(double orig)
 {
 	double result = 0.0;
@@ -113,6 +116,7 @@ public static double round2(double orig)
 }
 
 //part 3
+
 public static double exponent(double baseNum, int exponent) {
 	int i = 1;
 	double k = baseNum;
@@ -122,7 +126,7 @@ public static double exponent(double baseNum, int exponent) {
 			}
 	return k;
 	}
-
+// multiplies all integers between 1 and the int
 public static int factorial(int num) {
 	int i = 1;
 	for (i = 1; num >= 1; num--) {
@@ -131,7 +135,7 @@ public static int factorial(int num) {
 return i;
 	}
 
-
+// takes a int and decides whehter it is prime
 public static boolean isPrime(int num) {
 	for(int i = 2; i < num; i++) {
 		if(isDivisibleBy(num, i) == true) {
@@ -141,6 +145,7 @@ public static boolean isPrime(int num) {
 		return true;
 	}
 
+// takes 2 ints and returns the greatest common factor of the 2 ints
 public static int gcf(int num1, int num2) {
 	while(num2 != 0) {
         int i = num1;
@@ -152,7 +157,7 @@ public static int gcf(int num1, int num2) {
 	}
     return Math.abs(num1);
 }
-
+// takes a double, returns squareroot of the double
 public static double sqrt(double a) {
 	if(a == 0) {
 		return a;
@@ -174,6 +179,11 @@ public static double sqrt(double a) {
 }
 	
 // part 4
+/* quadratic formula
+ * take the coefficients of a standard form equation as 3 ints
+ * returns the values of the equation's roots
+ * may return 1, 2, or no answers
+ */
 public static String quadForm(int a, int b, int c) {
 	String k = "no real roots";
 	double x1;
