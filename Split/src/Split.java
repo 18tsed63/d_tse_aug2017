@@ -33,7 +33,8 @@ public class Split{
 		*/
 	}
 		public static String getTheFilling(String sandwich) {
-			String filling = Arrays.toString(sandwich.split("bread"));
+			String [] i = sandwich.split("bread");
+			String filling = i[1];
 			return filling ;
 		}
 	
