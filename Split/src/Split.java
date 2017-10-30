@@ -26,6 +26,7 @@ public class Split{
 		System.out.println(Arrays.toString("I really like really red apples".split("really")));
 		System.out.println(Arrays.toString("really I really like really red really apples, really".split("really")));
 		System.out.println(getTheFilling("applespineapplesbreadlettustomatobaconmayohambreadcheese"));
+		System.out.println(getTheFilling("applespineapplesbreadlettustomatobreadbaconbreadmayohambreadcheese"));
 		//Your task Part 1:
 		/*Write a method that take in a string like "applespineapplesbreadlettustomatobaconmayohambreadcheese" describing a sandwich
 		* use String.split to split up the sandwich by the word "bread" and return what's in the middle of the sandwich and ignores what's on the outside
@@ -34,9 +35,25 @@ public class Split{
 	}
 		public static String getTheFilling(String sandwich) {
 			String [] i = sandwich.split("bread");
-			String filling = i[1];
-			return filling ;
-		}
+			String filling = "";
+			//not a sandwich
+			if(i.length <= 2) {
+				String j = "not a sandwich";
+				return j;
+			}
+			//peasant sandwich
+			/*else if(i.length == 3) {
+			filling = i[1];
+			return filling;
+			}*/
+			//fancy sandwich
+			if(i.length >= 2) {
+			filling = Arrays.toString(Arrays.copyOfRange(i, 1, i.length - 1));
+			return filling;
+			}
+			
+			
+			return filling;	
+	}
 	
-
 }
