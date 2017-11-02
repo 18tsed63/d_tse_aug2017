@@ -36,6 +36,10 @@ public class Split{
 			String filling = Arrays.toString(sandwich.split("bread"));
 			return filling ;
 		}
+		
+		public static void main(String[]args) {
+			System.out.print(getTheFilling("applespineapplesbreadlettustomatobaconmayohambreadcheese"));
+		}
 	
 
 }
