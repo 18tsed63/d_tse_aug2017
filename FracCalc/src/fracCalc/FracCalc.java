@@ -38,36 +38,57 @@ public class FracCalc {
     public static String produceAnswer(String input)
     { 
     	String[] expression = input.split(" ");
-        String operand1 = expression[0];
+        //operands and operator
+    	String operand1 = expression[0];
         String operator = expression[1];
         String operand2 = expression[2];
+        //operands in arrays
         String[] arr1 = splitOp(operand1);
         String[] arr2 = splitOp(operand2);
-        String result = "";
-        if(operator.equals("+")) {
-        	result = addFrac(arr1, arr2);
+        //operand 1 divided into ints (whole, numerator, denominator)
+        int whole1 = Integer.parseInt(arr1[0]);
+    	int numerator1 = Integer.parseInt(arr1[1]);
+    	int denominator1 = Integer.parseInt(arr1[2]);
+    	//operand 2 divided into ints (whole, numerator, denominator)
+    	int whole2 = Integer.parseInt(arr2[0]);
+    	int numerator2 = Integer.parseInt(arr2[1]);
+    	int denominator2 = Integer.parseInt(arr2[2]);
+    	//turn both operands to improper fractions
+    	/*Why? So, adding and subtracting negatives will be more efficient
+    	 * and it is a necessity for multiplying and dividing.
+    	 */
+    	int [] opArr1 = toImproperFrac(whole1, numerator1, denominator1);
+		int [] opArr2 = toImproperFrac(whole2, numerator2, denominator2);
+    	int[] result = new int [2];
+    	String answer = "";
+    	
+        if(operator.equals("+")) {        	
+        	//common denominator
+    		opArr1[0] *= opArr2[1];
+        	opArr2[0] *= opArr1[1];        	
+        	int denominator = opArr1[1] * opArr2[1];
+        	
+        	result = addFrac(opArr1[0], opArr2[0], denominator);
+        	answer = toMixedNum(result);	
         }
         else if(operator.equals("-")) {
-        	result = subtractFrac(arr1, arr2);
+        	//common denominator
+        	opArr1[0] *= opArr2[1];
+        	opArr2[0] *= opArr1[1];
+        	
+        	int denominator = denominator1 * denominator2;
+        	result = subtractFrac(opArr1[0], opArr2[0], denominator);
+        	answer = toMixedNum(result);
         }
-        else if(operator.equals("*")) {
-        	result = multiplyFrac(arr1, arr2);
+       else if(operator.equals("*")) {       	    		
+        	result = multiplyFrac(opArr1[0], opArr1[1], opArr2[0], opArr2[1]);        	
+        	answer = toMixedNum(result);   			
         }
-        else if(operator.equals("/")) {
-        	result = divideFrac(arr1, arr2);
-        }
-        //simplify for (num/den = 1)
-        String[] n = splitOp(result);
-        if(Integer.parseInt(n[1]) == Integer.parseInt(n[2])) {
-        	result = simplify(result);
-        }
-        //simplify for wholeNums
-        if(result.indexOf("0/1") >= 0) {
-        	result = simplify(result);
-        }
-        
-        return result;
-        
+        else if(operator.equals("/")) {        	
+    		result = divideFrac(opArr1[0], opArr1[1], opArr2[0], opArr2[1]);
+        	answer = toMixedNum(result);
+        }        
+        return answer;  
     }
     
     public static String[] splitOp(String equation) {
@@ -95,19 +116,70 @@ public class FracCalc {
     }
     return expression;
     }
-    
-    public static String toImproperFrac(int whole, int numerator, int denominator) {
-    	numerator = (whole * denominator) + numerator;
-    	String toImproperFrac = (numerator + "/" + denominator);
-    	return toImproperFrac;
-    	}
-    
-    public static String toMixedNum(int numerator, int denominator) {
-    	int wholeNum = numerator / denominator;
-    	numerator = numerator % denominator;
-    	String toMixedNum = (wholeNum + "_" + numerator + "/" + denominator);
-    	return toMixedNum;
-    	}
+
+    public static int[] toImproperFrac (int whole, int numerator, int denominator){
+		int[] improperFrac=new int [2];
+		//negative frac
+		if(whole<0){
+			
+			improperFrac[0] = (whole*denominator)+(numerator*-1)	;
+			improperFrac[1] = denominator;
+		}else{
+			improperFrac[0] =((whole*denominator)+numerator);
+			improperFrac[1]=denominator;
+		}
+		return improperFrac;
+	}
+
+public static String toMixedNum(int[] answer){
+		
+	String reducedAnswer = "";
+	int gcf = gcf(answer[0], answer[1]);
+	if(gcf != 1){
+		answer[0] = answer[0] / gcf;
+		answer[1] = answer[1] / gcf;
+	}
+	if(answer[1] < 0){
+		answer[1] = Math.abs(answer[1]);
+		answer[0] = answer[0]*-1;
+	}
+	int coefficient = answer[0] / answer[1];
+	int remainder = answer[0] % answer[1];
+	if (coefficient < 0){
+	  	if(remainder == 0 && answer[1] == 1){
+	  		reducedAnswer = (Integer.toString(coefficient));
+	 	}
+	  	else if(remainder == 0 && answer[1] == -1){
+	 			reducedAnswer = (Integer.toString(coefficient));
+	  	}
+	  	else{
+		  		 reducedAnswer = coefficient + "_" + Math.abs(remainder) + "/" + Math.abs(answer[1]);
+		}
+	}
+	else if(remainder == 0){
+		reducedAnswer = coefficient+"";		
+	}
+	else if(coefficient == 0){			
+		if(remainder < 0 && answer[1] < 0){
+			int newNum = remainder*-1;
+		  	int newDen = answer[1]*-1;
+		  	reducedAnswer = newNum + "/" + newDen;
+	}
+		else{
+				reducedAnswer = remainder + "/" + answer[1];
+		}
+	}
+	else if(remainder < 0 && answer[1] < 0){
+ 	    int numerator = remainder * -1;
+ 		int denominator = answer[1] * -1;
+ 		reducedAnswer = coefficient + "_" + numerator + "/" + denominator;
+	}
+	else{
+			reducedAnswer = coefficient + "_" + remainder + "/" + answer[1];
+		}
+					    		
+	   	return reducedAnswer;
+	}	
     
     public static boolean isDivisibleBy(int Dividend, int Divisor){
     	if(Dividend%Divisor==0) return true; 
@@ -126,182 +198,56 @@ public class FracCalc {
     	}
         return Math.abs(num1);
     }
-    
-    public static String simplify(String fraction) {
-    	String simpleAnswer = "";
-    	String[] simpleArr = splitOp(fraction);
-    	int whole = Integer.parseInt(simpleArr[0]);
-		int num = Integer.parseInt(simpleArr[1]);
-		int den = Integer.parseInt(simpleArr[2]);
-		int factor = gcf(num, den);
-    	if(simpleArr[1].equals("0") == true) {
-    		simpleAnswer = simpleArr[0];
-    	}
-    	else if(whole == 0) {
-    		num /= factor;
-    		den /= factor;
-    		String Answer = toMixedNum(num, den);
-    		String[] j = splitOp(Answer);
-    		int k = Integer.parseInt(j[1]);
-    		int l = Integer.parseInt(j[2]);
-    		if(k < 0) {
-    			j[1] = "" + (-1 * k);	
-    		}
-    		if(l < 0) {
-    			j[2] = "" + (-1 * l);
-    		}
-    		simpleAnswer = j[0] + "_" + j[1] + "/" + j[2];
-    		if(num == den) {
-    			simpleAnswer = "" + (whole + 1);
-    		}
-    	}
-    	else if(whole > 0) {
-    		num /= factor;
-    		den /= factor;
-    		String mixNum = toMixedNum(num, den);
-    		String arr[] = splitOp(mixNum);
-    		int i = Integer.parseInt(arr[0]);
-    		i += whole;
-    		simpleAnswer = i + "_" + arr[1] + "/" + arr[2];
-    	}
-    	return simpleAnswer;
+
+    public static int[] addFrac(int numerator1, int numerator2, int denominator) {
+    	
+    	int sumNum;
+    	int[] sumArr = new int [2];
+
+	    	sumNum = numerator1 + numerator2;
+	    	
+	    	sumArr[0] = sumNum;
+	    	sumArr[1] = denominator;
+	   
+    	return sumArr;
     }
     
-    public static String addFrac(String[] arr1, String[] arr2) {
-    	String sum = "";
-    	int whole1 = Integer.parseInt(arr1[0]);
-    	int numerator1 = Integer.parseInt(arr1[1]);
-    	int denominator1 = Integer.parseInt(arr1[2]);
-    	int whole2 = Integer.parseInt(arr2[0]);
-    	int numerator2 = Integer.parseInt(arr2[1]);
-    	int denominator2 = Integer.parseInt(arr2[2]);
-    	numerator1 *= denominator2;
-    	numerator2 *= denominator1;
-    	int denominator = denominator1 * denominator2;
-    	if(whole1 >= 0 && whole2 >=0) {
-	    	int sumWhole = whole1 + whole2;
-	    	int sumNum = numerator1 + numerator2;
-	    	sum = sumWhole + "_" + sumNum + "/" + denominator;
-	    }
-    	if(whole1 < 0) {
-    		String[] newArr = new String [3];
-    		newArr[0] = "" + whole1 * -1;
-    		newArr[1] = arr1[1];
-    		newArr[2] = arr1[2];
-    		sum = subtractFrac(newArr, arr2);
-    		sum = "-" + sum;
-    		if(sum.indexOf("--") >= 0) {
-    			sum = sum.substring(2, sum.length());
-    		}
-    	}
-    	return sum;
+    public static int[] subtractFrac(int numerator1, int numerator2, int denominator) {
+    	
+    	int diffNum;
+    	int[] diffArr = new int [2];
+    	
+    	diffNum = numerator1 - numerator2;
+    	
+    	diffArr[0] = diffNum;
+    	diffArr[1] = denominator;
+    		
+    	return diffArr;
     }
     
-    public static String subtractFrac(String[] arr1, String[] arr2) {
-    	String difference = "";
-    	int whole1 = Integer.parseInt(arr1[0]);
-    	int numerator1 = Integer.parseInt(arr1[1]);
-    	int denominator1 = Integer.parseInt(arr1[2]);
-    	int whole2 = Integer.parseInt(arr2[0]);
-    	int numerator2 = Integer.parseInt(arr2[1]);
-    	int denominator2 = Integer.parseInt(arr2[2]);
-    	numerator1 *= denominator2;
-    	numerator2 *= denominator1;
-    	int denominator = denominator1 * denominator2;
-    	String operand1 = toImproperFrac(whole1, numerator1, denominator);
-    	String operand2 = toImproperFrac(whole2, numerator2, denominator);
-    	String[] op1 = operand1.split("/");
-    	String[] op2 = operand2.split("/");
-    	numerator1 = Integer.parseInt(op1[0]);
-    	denominator1 = Integer.parseInt(op1[1]);
-    	numerator2 = Integer.parseInt(op2[0]);
-    	denominator2 = Integer.parseInt(op2[1]);
-    	if(whole2 >= 0) {
-    		int diffNum = numerator1 - numerator2;
-    		difference = diffNum + "/" + denominator;
-    	}
-    	if(whole2 < 0) {
-    		String[] newArr = new String [3];
-    		newArr[0] = "" + whole2 * -1;
-    		newArr[1] = arr2[1];
-    		newArr[2] = arr2[2];
-    		difference = addFrac(arr1, newArr);
-    	}
-    	return difference;
-    }
-    
-    public static String multiplyFrac(String[] arr1, String[] arr2) {
-    	String product = "";
-    	int whole1 = Integer.parseInt(arr1[0]);
-    	int numerator1 = Integer.parseInt(arr1[1]);
-    	int denominator1 = Integer.parseInt(arr1[2]);
-    	int whole2 = Integer.parseInt(arr2[0]);
-    	int numerator2 = Integer.parseInt(arr2[1]);
-    	int denominator2 = Integer.parseInt(arr2[2]);
-    	int i = whole1;
-    	int j = whole2;
-    	if(whole1 < 0) {
-    		whole1 *= -1;
-    	}
-    	if(whole2 < 0) {
-    		whole2 *= -1;
-    	}
-    	String operand1 = toImproperFrac(whole1, numerator1, denominator1);
-    	String operand2 = toImproperFrac(whole2, numerator2, denominator2);
-    	String[] op1 = operand1.split("/");
-    	String[] op2 = operand2.split("/");
-    	numerator1 = Integer.parseInt(op1[0]);
-    	denominator1 = Integer.parseInt(op1[1]);
-    	numerator2 = Integer.parseInt(op2[0]);
-    	denominator2 = Integer.parseInt(op2[1]);
+    public static int[] multiplyFrac(int numerator1, int denominator1,
+    		int numerator2, int denominator2) {
+    	int[] prodArr = new int [3];
     	
     	int prodNum = numerator1 * numerator2;
     	int prodDen = denominator1 * denominator2;
-    	product = prodNum + "/" + prodDen;
-    	if(i < 0 && j < 0) {
-    		product = prodNum + "/" + prodDen;
-    	}
-    	else if(i < 0 || j < 0) {
-    		product = "-" + prodNum + "/" + prodDen;
-    	}
-    	return product;
+    	
+    	prodArr[0] = prodNum;
+    	prodArr[1] = prodDen;
+    	
+    	return prodArr;
     }
     
-    public static String divideFrac(String[] arr1, String[] arr2) {
-    	String quotient = "";
-    	int whole1 = Integer.parseInt(arr1[0]);
-    	int numerator1 = Integer.parseInt(arr1[1]);
-    	int denominator1 = Integer.parseInt(arr1[2]);
-    	int whole2 = Integer.parseInt(arr2[0]);
-    	int numerator2 = Integer.parseInt(arr2[1]);
-    	int denominator2 = Integer.parseInt(arr2[2]);
-    	int i = whole1;
-    	int j = whole2;
-    	if(whole1 < 0) {
-    		whole1 *= -1;
-    	}
-    	if(whole2 < 0) {
-    		whole2 *= -1;
-    	}
-    	String operand1 = toImproperFrac(whole1, numerator1, denominator1);
-    	String operand2 = toImproperFrac(whole2, numerator2, denominator2);
-    	String[] op1 = operand1.split("/");
-    	String[] op2 = operand2.split("/");
-    	numerator1 = Integer.parseInt(op1[0]);
-    	denominator1 = Integer.parseInt(op1[1]);
-    	numerator2 = Integer.parseInt(op2[0]);
-    	denominator2 = Integer.parseInt(op2[1]);
+    public static int[] divideFrac(int numerator1, int denominator1,
+    		int numerator2, int denominator2) {
+    	int[] quoArr = new int [2];
+    	
     	int quoNum = numerator1 * denominator2;
     	int quoDen = denominator1 * numerator2;
-    	quotient = quoNum + "/" + quoDen;
-    	if(i < 0 && j < 0) {
-    		quotient = quoNum + "/" + quoDen;
-    	}
-    	else if(i < 0 || j < 0) {
-    		quotient = "-" + quoNum + "/" + quoDen;
-    	}
-    	return quotient;
+    	
+    	quoArr[0] = quoNum;
+    	quoArr[1] = quoDen;
+
+    	return quoArr;
     }
 }
-
-
