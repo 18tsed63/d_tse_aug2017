@@ -20,9 +20,8 @@ public class Wizard extends Traveler
 	
 	public void travel(int miles)
 	{
-		super.travel(miles);
-		miles = super.getDistanceTraveled() * 2;
-		super.travel(miles);
+		super.travel(miles * 3);
+		
 	}
 	
 	public String getName()
