@@ -103,9 +103,7 @@ public class ThereAndBackAgain
 			
 			
 		}
-		String a = "hi";
-		String b = "there";
-		String c = a + "\n" + b;
+		
 		return j;
 	}
 }
