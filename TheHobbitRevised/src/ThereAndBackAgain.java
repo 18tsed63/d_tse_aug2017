@@ -93,13 +93,12 @@ public class ThereAndBackAgain
 		for(Traveler trav: party) {
 			trav.travel(miles);
 			}
-		String j = (party.get(0)).getName() + " has traveled " 
-				+ (party.get(0)).getDistanceTraveled() + "\n"; 
-		for(int i = 1; i < party.size(); i++) {
+		String j = ""; 
+		for(int i = 0; i < party.size(); i++) {
 			String k = (party.get(i)).getName() + " has traveled " 
-						+ (party.get(i)).getDistanceTraveled() + "\n"; 
-			String l = j + k;
-			j = l;
+					+ (party.get(i)).getDistanceTraveled() + "\n";
+			j += k;
+			
 			
 			
 		}
