@@ -8,7 +8,7 @@ package textExcel;
 public class EmptyCell implements Cell{
 	private String EmptyCell;
 	public EmptyCell() {
-		EmptyCell = "|          |";
+		EmptyCell = "          ";
 	}
 	public String abbreviatedCellText() {
 		return EmptyCell;

@@ -9,9 +9,8 @@ package textExcel;
 
 public class Spreadsheet implements Grid
 {
-
+	private Cell[][] sheet = new Cell[20][12];
 	public Spreadsheet() {
-		Cell[][] sheet = new Cell[20][12];
 		for(int i = 0; i < sheet.length; i++) {
 			for(int j = 0; j < sheet[i].length; j++) {
 				Cell k = new EmptyCell();
@@ -43,8 +42,7 @@ public class Spreadsheet implements Grid
 	@Override
 	public Cell getCell(Location loc)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return sheet[loc.getRow()][loc.getCol()];
 	}
 
 	@Override

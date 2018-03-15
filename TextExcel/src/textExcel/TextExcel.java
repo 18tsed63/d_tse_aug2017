@@ -19,7 +19,7 @@ public class TextExcel
 		boolean done = false;
 		while(!done == true){
 		
-		
+		//test
 		SpreadsheetLocation a = new SpreadsheetLocation("L20");
 		int b = a.getCol();
 		int c = a.getRow();
