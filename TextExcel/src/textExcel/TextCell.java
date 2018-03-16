@@ -6,9 +6,11 @@ public class TextCell implements Cell{
 		this.text = text;
 	}
 	public String abbreviatedCellText() {
+		String text = this.text.substring(1,this.text.length() - 1) + "           ";
 		return text.substring(0,10);
 	}
 	public String fullCellText() {
-		return "\"" + text + "\"";
+		return text;
 	}
 }
+

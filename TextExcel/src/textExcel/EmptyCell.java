@@ -8,14 +8,14 @@ package textExcel;
 public class EmptyCell implements Cell{
 	private String EmptyCell;
 	public EmptyCell() {
-		EmptyCell = "          ";
+		EmptyCell = "";
 	}
 	public String abbreviatedCellText() {
-		return EmptyCell;
+		String EmptyCell = this.EmptyCell;
+		return EmptyCell + "          ";
 	}
 	public String fullCellText() {
 		return EmptyCell;
 	}
 }
-
 
