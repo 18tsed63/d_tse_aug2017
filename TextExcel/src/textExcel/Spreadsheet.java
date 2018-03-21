@@ -92,8 +92,18 @@ public class Spreadsheet implements Grid
 	@Override
 	public String getGridText()
 	{
-		String grid = "";
+		String grid = "   ";
+		for(char k = 'A'; k <= 'L'; k++) {
+			grid += "|" + k + "         ";
+		}
+		
+		/*String grid = "|A         |B         |C         |D         |E         "
+					+ "|F         |G         |H         |I         |J         "
+					+ "|K         |L         | \n";
+		*/
 		for(int i = 0; i < sheet.length; i++) {
+			String number = i + "   ";
+			grid += number.substring(0, 3);
 			for(int j = 0; j < sheet[i].length; j++) {
 				grid += "|" + sheet[i][j].abbreviatedCellText();
 			}

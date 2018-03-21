@@ -25,18 +25,20 @@ public class TextExcel
 		//test
 		Spreadsheet test = new Spreadsheet();
 		
-		System.out.print(test.processCommand("A1 = \"text with spaces\""));
+		System.out.print(test.processCommand("A1 = \"A1 = ( 1 / 1 )\""));
 		//System.out.println(test.processCommand("a1"));
 		//System.out.println(test.processCommand("clear"));
 		System.out.println(test.processCommand("a1"));
-		System.out.println(test.processCommand(" clear ".trim()));
-		
+		 String clear = " clear ".trim();
+		 //System.out.println(test.processCommand(clear));
+		//System.out.println(test.processCommand(" clear ".trim()));
+		 //System.out.println(test.processCommand("a1"));
 		//System.out.println(test.processCommand("a1").equals(""));
 		
 		
 		System.out.println("Do you want to keep going? (Type \"quit\" to end)");
 		String end = userInput.next();
-		//toLowerCase will enable both q and Q to end
+		//toLowerCase will enable both quit and QUIT to end
 		end = end.toLowerCase();
 		int n = end.indexOf("quit");
 		if(n == 0) {
