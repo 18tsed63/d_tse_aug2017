@@ -96,22 +96,18 @@ public class Spreadsheet implements Grid
 		for(char k = 'A'; k <= 'L'; k++) {
 			grid += "|" + k + "         ";
 		}
+		grid += "|\n";
 		
-		/*String grid = "|A         |B         |C         |D         |E         "
-					+ "|F         |G         |H         |I         |J         "
-					+ "|K         |L         | \n";
-		*/
 		for(int i = 0; i < sheet.length; i++) {
-			String number = i + "   ";
+			String number = i + 1 + "   ";
 			grid += number.substring(0, 3);
 			for(int j = 0; j < sheet[i].length; j++) {
 				grid += "|" + sheet[i][j].abbreviatedCellText();
 			}
-			grid += "\n";
+			grid += "|\n";
 		}
 		return grid;
 	}
 
 }
-
 
