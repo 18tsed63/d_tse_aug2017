@@ -26,14 +26,7 @@ public class TextExcel
 		Spreadsheet test = new Spreadsheet();
 		
 		System.out.print(test.processCommand("A1 = \"A1 = ( 1 / 1 )\""));
-		//System.out.println(test.processCommand("a1"));
-		//System.out.println(test.processCommand("clear"));
-		System.out.println(test.processCommand("a1"));
-		 String clear = " clear ".trim();
-		 //System.out.println(test.processCommand(clear));
-		//System.out.println(test.processCommand(" clear ".trim()));
-		 //System.out.println(test.processCommand("a1"));
-		//System.out.println(test.processCommand("a1").equals(""));
+		//System.out.println(Double.parseDouble("1.22345"));
 		
 		
 		System.out.println("Do you want to keep going? (Type \"quit\" to end)");
