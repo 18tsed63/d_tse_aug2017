@@ -1,16 +1,17 @@
 package textExcel;
 
 public class ValueCell implements Cell{
-	private String value;
+	private Double value;
 	public ValueCell(String value) {
-		this.value = value;
+		this.value = Double.parseDouble(value);
 	}
 	public String abbreviatedCellText() {
 		String result = this.value + "          ";
 		return result.substring(0,10);
 	}
 	public String fullCellText() {
-		return value;
+		String result = value + "";
+		return result;
 	}
 
 }
