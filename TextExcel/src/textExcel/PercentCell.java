@@ -1,17 +1,26 @@
 package textExcel;
 
-public class PercentCell implements Cell{
+public class PercentCell extends RealCell{
 	private String percent;
+	private double dec;
 	public PercentCell(String input) {
 		percent = input;
+		dec = Double.parseDouble(percent.substring(0, percent.indexOf("%"))) / 100;
+		
 	}
 	public String abbreviatedCellText() {
-		String result = percent.substring(1,percent.indexOf("."));
-		return result + "%";
+		String dec = (this.dec * 100.0) + "";
+		String result = dec.substring(0, dec.indexOf("."));
+		return (result + "%" + "          ").substring(0, 10);
 	}
 	public String fullCellText() {
-		String result = percent.substring(1,percent.length() - 1);
-		double dec = Double.parseDouble(result) / 100;
+		//String result = percent.substring(1,percent.length() - 1);
+		//double dec = Double.parseDouble(result) / 100;
 		return dec + "";
 	}
+	public double getDoubleValue() {
+		
+		return dec;
+	}
 }
+

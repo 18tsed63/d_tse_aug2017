@@ -63,9 +63,25 @@ public class Spreadsheet implements Grid {
 		// cell assignment command
 		else if (arr.length > 1) {
 			String[] texts = command.split(" ", 3);
-			sheet[row][col] = new TextCell(texts[2]);
+			//text cell
+			if (texts[2].indexOf("\"") >= 0) {
+				
+				sheet[row][col] = new TextCell(texts[2]);
+				
+			}
+			//formula cell
+			else if (texts[2].indexOf("(") >= 0) {
+				sheet[row][col] = new FormulaCell(texts[2]);
+			}
+			//percent cell
+			else if (texts[2].indexOf("%") >= 0) {
+				sheet[row][col]  = new PercentCell(texts[2]);
+			}
+			//value cell
+			else {
+				sheet[row][col] = new ValueCell(texts[2]);
+			}
 			result = getGridText();
-
 		}
 		return result;
 	}

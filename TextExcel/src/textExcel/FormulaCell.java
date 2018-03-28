@@ -6,7 +6,7 @@ public class FormulaCell implements Cell{
 		formula = input;
 	}
 	public String abbreviatedCellText() {
-		return "          ";
+		return "solved eqn";
 	}
 	public String fullCellText() {
 		return formula;
