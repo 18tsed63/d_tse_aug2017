@@ -14,12 +14,8 @@ public class SpreadsheetLocation implements Location
     @Override
     public int getRow()
     {
-    	
     	String row = cellName.substring(1);
     	int i = Integer.parseInt(row);
-    	
-    	
-    	
         return i - 1;
     }
 

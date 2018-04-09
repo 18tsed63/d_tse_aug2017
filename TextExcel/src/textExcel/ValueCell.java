@@ -1,11 +1,12 @@
 package textExcel;
 
-public class ValueCell extends RealCell{
-	private String input;
+public class ValueCell extends RealCell implements Cell {
+	//private String input;
 	private Double value;
 	public ValueCell(String value) {
-		input = value;
-		this.value = Double.parseDouble(input);
+		super(value);
+		//input = value;
+		this.value = Double.parseDouble(value);
 	}
 	public String abbreviatedCellText() {
 		String result = this.value + "          ";
@@ -13,10 +14,10 @@ public class ValueCell extends RealCell{
 	}
 	public String fullCellText() {
 		//String result = value + "";
-		return input;
+		return getInput();
 	}
 	public double getDoubleValue() {
-		
+		//this.value = Double.parseDouble(getInput());
 		return value;
 	}
 }

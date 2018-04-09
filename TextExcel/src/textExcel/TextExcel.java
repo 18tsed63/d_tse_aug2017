@@ -25,11 +25,11 @@ public class TextExcel
 		//test
 		Spreadsheet test = new Spreadsheet();
 		
-		System.out.print(test.processCommand("A1 = \"A1 = ( 1 / 1 )\""));
+		System.out.print(test.processCommand("A1 = (50 + 50 * 1 - 2 / 1)"));
+		System.out.println(test.processCommand("A1"));
+		System.out.println((Double.parseDouble("10.0 * 1")));
 		//System.out.println(Double.parseDouble("1.22345"));
-		String a = "\"123.11223%\"";
-		String b = a.substring(1,a.indexOf("."));
-		System.out.println((b));
+		
 		
 		
 		System.out.println("Do you want to keep going? (Type \"quit\" to end)");
@@ -46,4 +46,3 @@ public class TextExcel
 		}
 	}
 }
-
