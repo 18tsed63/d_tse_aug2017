@@ -25,14 +25,15 @@ public class Spreadsheet implements Grid {
 	public String processCommand(String command) {
 		// command = command.toLowerCase();
 		String result = "";
-		String[] arr = command.split(" ");
+		String[] arr = command.split(" ", 3);
 		// makes it so commands are not sensitive to upper or lower case
 		arr[0] = arr[0].toLowerCase();
-		SpreadsheetLocation cell = new SpreadsheetLocation(arr[0]);
+		//SpreadsheetLocation cell = new SpreadsheetLocation(arr[0]);
 		int row = 0;
 		int col = 0;
 		// if(command.indexOf("clear") < 0) {
 		if (!arr[0].equals("clear")) {
+			SpreadsheetLocation cell = new SpreadsheetLocation(arr[0]);
 			row = cell.getRow();
 			col = cell.getCol();
 		}
@@ -49,8 +50,8 @@ public class Spreadsheet implements Grid {
 			else {
 				for (int i = 0; i < sheet.length; i++) {
 					for (int j = 0; j < sheet[i].length; j++) {
-						Cell k = new EmptyCell();
-						sheet[i][j] = k;
+						
+						sheet[i][j] =  new EmptyCell();;
 					}
 				}
 			}
@@ -62,24 +63,24 @@ public class Spreadsheet implements Grid {
 		}
 		// cell assignment command
 		else if (arr.length > 1) {
-			String[] texts = command.split(" ", 3);
+			//String[] texts = command.split(" ", 3);
 			//text cell
-			if (texts[2].indexOf("\"") >= 0) {
+			if (arr[2].indexOf("\"") >= 0) {
 				
-				sheet[row][col] = new TextCell(texts[2]);
+				sheet[row][col] = new TextCell(arr[2]);
 				
 			}
 			//formula cell
-			else if (texts[2].indexOf("(") >= 0) {
-				sheet[row][col] = new FormulaCell(texts[2]);
+			else if (arr[2].indexOf("(") >= 0) {
+				sheet[row][col] = new FormulaCell(arr[2]);
 			}
 			//percent cell
-			else if (texts[2].indexOf("%") >= 0) {
-				sheet[row][col]  = new PercentCell(texts[2]);
+			else if (arr[2].indexOf("%") >= 0) {
+				sheet[row][col]  = new PercentCell(arr[2]);
 			}
 			//value cell
 			else {
-				sheet[row][col] = new ValueCell(texts[2]);
+				sheet[row][col] = new ValueCell(arr[2]);
 			}
 			result = getGridText();
 		}

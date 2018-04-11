@@ -8,7 +8,9 @@ public class FormulaCell extends RealCell implements Cell {
 	}
 
 	public String abbreviatedCellText() {
-		return "solved eqn";
+		double equation = getDoubleValue();
+		String result = equation + "          ";
+		return result.substring(0, 10);
 	}
 
 	public String fullCellText() {
@@ -16,21 +18,21 @@ public class FormulaCell extends RealCell implements Cell {
 	}
 
 	public double getDoubleValue() {
-		String[] arr = getInput().split(" ");
-		for (int i = 0; i < arr.length; i++) {
-			if (arr[i + 1] == "+") {
-
-			}
-			else if (arr[i + 1] == "+") {
-
-			}
-			else if (arr[i + 1] == "+") {
-
-			}
-			else{
-
+		String equation = getInput();
+		String eqn = equation.substring(2, equation.length() - 2);
+		String[] arr = eqn.split(" ");
+		double result = Double.parseDouble(arr[0]);
+		for (int i = 1; i < arr.length; i += 2) {
+			if (arr[i].equals("+")) {
+				result += Double.parseDouble(arr[i + 1]);
+			} else if (arr[i].equals("-")) {
+				result -= Double.parseDouble(arr[i + 1]);
+			} else if (arr[i].equals("*")) {
+				result *= Double.parseDouble(arr[i + 1]);
+			} else {
+				result /= Double.parseDouble(arr[i + 1]);
 			}
 		}
-		return 0;
+		return result;
 	}
 }
