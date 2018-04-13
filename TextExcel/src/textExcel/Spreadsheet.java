@@ -72,7 +72,7 @@ public class Spreadsheet implements Grid {
 			}
 			//formula cell
 			else if (arr[2].indexOf("(") >= 0) {
-				sheet[row][col] = new FormulaCell(arr[2]);
+				sheet[row][col] = new FormulaCell(arr[2], sheet);
 			}
 			//percent cell
 			else if (arr[2].indexOf("%") >= 0) {
