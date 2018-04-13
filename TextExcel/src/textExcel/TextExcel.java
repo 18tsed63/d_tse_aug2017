@@ -20,6 +20,7 @@ public class TextExcel {
 		boolean done = false;
 		Spreadsheet grid = new Spreadsheet();
 		while (!done == true) {
+			System.out.println("Enter command (Type quit to end): ");
 			String input = userInput.nextLine();
 			input = input.toLowerCase();
 			if (input.indexOf("quit") < 0) {
