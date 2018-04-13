@@ -15,8 +15,7 @@ public class Spreadsheet implements Grid {
 	public Spreadsheet() {
 		for (int i = 0; i < sheet.length; i++) {
 			for (int j = 0; j < sheet[i].length; j++) {
-				Cell k = new EmptyCell();
-				sheet[i][j] = k;
+				sheet[i][j] = new EmptyCell();;
 			}
 		}
 	}
@@ -28,10 +27,9 @@ public class Spreadsheet implements Grid {
 		String[] arr = command.split(" ", 3);
 		// makes it so commands are not sensitive to upper or lower case
 		arr[0] = arr[0].toLowerCase();
-		//SpreadsheetLocation cell = new SpreadsheetLocation(arr[0]);
 		int row = 0;
 		int col = 0;
-		// if(command.indexOf("clear") < 0) {
+		//get row and col when command is not clear
 		if (!arr[0].equals("clear")) {
 			SpreadsheetLocation cell = new SpreadsheetLocation(arr[0]);
 			row = cell.getRow();
@@ -39,9 +37,7 @@ public class Spreadsheet implements Grid {
 		}
 		// clear command
 		if (arr[0].equals("clear")) {
-			// if(command.indexOf("clear") >= 0) {
 			// clear cell
-
 			if (arr.length > 1) {
 				SpreadsheetLocation clearCell = new SpreadsheetLocation(arr[1]);
 				sheet[clearCell.getRow()][clearCell.getCol()] = new EmptyCell();
@@ -63,12 +59,10 @@ public class Spreadsheet implements Grid {
 		}
 		// cell assignment command
 		else if (arr.length > 1) {
-			//String[] texts = command.split(" ", 3);
 			//text cell
 			if (arr[2].indexOf("\"") >= 0) {
 				
-				sheet[row][col] = new TextCell(arr[2]);
-				
+				sheet[row][col] = new TextCell(arr[2]);	
 			}
 			//formula cell
 			else if (arr[2].indexOf("(") >= 0) {

@@ -6,7 +6,6 @@ public class FormulaCell extends RealCell implements Cell {
 	public FormulaCell(String input, Cell[][] sheet) {
 		super(input);
 		this.sheet = sheet;
-		// formula = input;
 	}
 
 	public String abbreviatedCellText() {
@@ -26,7 +25,6 @@ public class FormulaCell extends RealCell implements Cell {
 		String[] arr = eqn.split(" ");
 		double result = 0;
 
-		// boolean isLetter = Character.isLetter(eqn.charAt(0));
 		if (Character.isLetter(eqn.charAt(0)) == true) {
 			// when arr[0] is SUM or AVG
 			if (Character.isLetter(eqn.charAt(1)) == true) {
@@ -83,20 +81,6 @@ public class FormulaCell extends RealCell implements Cell {
 
 	public double sum(int startRow, int startCol, int endRow, int endCol) {
 		double sum = 0;
-		/*// if the range of the cells are on same row
-		if (startRow == endRow) {
-			for (int i = startCol; i <= endCol; i++) {
-				RealCell iCell = (RealCell) sheet[startCol][i];
-				sum += iCell.getDoubleValue();
-			}
-		}
-		// if the range of the cells are same column
-		else {
-			for (int j = startRow; j <= endRow; j++) {
-				RealCell jCell = (RealCell) sheet[j][startCol];
-				sum += jCell.getDoubleValue();
-			}
-		}*/
 		for(int i = startRow; i <= endRow; i++) {
 			for(int j = startCol; j <= endCol; j++) {
 				RealCell k = (RealCell) sheet[i][j];
@@ -109,15 +93,6 @@ public class FormulaCell extends RealCell implements Cell {
 	public double avg(int startRow, int startCol, int endRow, int endCol) {
 		double result = sum(startRow, startCol, endRow, endCol);
 		int counter = (endRow - startRow + 1) * (endCol - startCol + 1);
-		// horizontal
-		/*if (startRow == endRow) {
-			counter = endCol - startCol;
-		}
-		// vertical
-		else {
-			counter = (endRow - startRow) + 1;
-		}*/
-		
 		return result / counter;
 	}
 
